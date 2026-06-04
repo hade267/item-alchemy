@@ -148,18 +148,7 @@ public class KleinStarRechargeManager {
     private static List<ItemStack> findKleinStars(Player player) {
         List<ItemStack> stars = new ArrayList<>();
         
-        // Check main hand and offhand
-        ItemStack mainHand = player.getMainHandStackAsM();
-        ItemStack offHand = player.getOffHandStackAsM();
-        
-        if (mainHand.getItem().instanceOf(KleinStar.class) && KleinStar.getStoredEmc(mainHand) > 0) {
-            stars.add(mainHand);
-        }
-        if (offHand.getItem().instanceOf(KleinStar.class) && KleinStar.getStoredEmc(offHand) > 0) {
-            stars.add(offHand);
-        }
-        
-        // Check inventory
+        // Check inventory (including held slots)
         CompatPlayerInventory inventory = new CompatPlayerInventory(player.getInventory());
         for (int i = 0; i < inventory.callSize(); i++) {
             ItemStack stack = inventory.callGetStackAsMidohra(i);
